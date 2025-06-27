@@ -7,19 +7,14 @@ import os
 #from flask.views import MethodView
 
 
-#class Base(DeclarativeBase):
-#  pass
-
 #From Flask Tutorial to have an Application Factory function
 def create_app(test_config=None):
 #    db = SQLAlchemy(model_class=Base)
     app = APIFlask(__name__, instance_relative_config=True)
-    # Initialize SQLAlchemy
     app.config.from_mapping(
         SECRET_KEY = 'dev',
- #       SQLALCHEMY_DATABASE_URI = 'sqlite:////project.db'
+        DATABASE=os.path.join(app.instance_path, 'pingpong.sqlite'),
     )
- #   db.init_app(app)
 
     if test_config is None:
         # load the instance config, if it exists, when not testing
@@ -39,21 +34,11 @@ def create_app(test_config=None):
     def index():
         return {'message': 'hello'}
 
-    @app.get('/pets')
-    def get_pets():
-        return {'message': 'OK'}
+    from . import db
+    db.init_app(app)
 
-    @app.post('/pets')
-    def create_pet():
-        return {'message': 'created'}, 201
-
-    @app.put('/pets/<int:pet_id>')
-    def update_pet(pet_id):
-        return {'message': 'updated'}
-
-    @app.delete('/pets/<int:pet_id>')
-    def delete_pet(pet_id):
-        return '', 204
+    from . import auth
+    app.register_blueprint(auth.bp)
 
     return app
 

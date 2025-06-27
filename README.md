@@ -8,4 +8,4 @@ The app is set up by using the Application Factory pattern with imported setting
 TODO:
 
 1. Add database
-1. Vary between imported config for prod and dev config. (see example in Flas tutorial)
+1. Vary between imported config for prod and dev config. (see example in Flas tutorial)githb.com
