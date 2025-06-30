@@ -70,9 +70,10 @@ def logout():
     session.clear()
     return redirect(url_for('index'))
 
-#This runs before the view function, no matter the URL. load_logged_in_user checks if a user id is stored in the session and gets that user’s data from the database, storing it on g.user, which lasts for the length of the request
+#This runs before the view function, no matter the URL.
 @bp.before_app_request
 def load_logged_in_user():
+    """checks if a user id is stored in the session and gets that user’s data from the database, storing it on g.user, which lasts for the length of the request"""
     user_id = session.get('user_id')
 
     if user_id is None:
@@ -84,8 +85,9 @@ def load_logged_in_user():
 
 #Decorators
 
-#The login_required function checks if a user is loaded and redirects to the login page otherwise. If a user is loaded the original view is called and continues normally. 
+#The login_required function
 def login_required(view):
+    """checks if a user is loaded and redirects to the login page otherwise. If a user is loaded the original view is called and continues normally."""
     @functools.wraps(view)
     def wrapped_view(**kwargs):
         if g.user is None:
