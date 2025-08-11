@@ -29,11 +29,6 @@ def create_app(test_config=None):
     except OSError:
         pass
 
-    #API Flask app
-    @app.get('/')
-    def index():
-        return {'message': 'hello'}
-
     #import pYthon modules before returning the app
     from . import db
     db.init_app(app)
