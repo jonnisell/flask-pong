@@ -10,7 +10,7 @@ import os
 #From Flask Tutorial to have an Application Factory function
 def create_app(test_config=None):
 #    db = SQLAlchemy(model_class=Base)
-    app = APIFlask(__name__, instance_relative_config=True)
+    app = APIFlask( __name__, title='LoveMeDo', version='0.0.2')
     app.config.from_mapping(
         SECRET_KEY = 'dev',
         DATABASE=os.path.join(app.instance_path, 'pingpong.sqlite'),
@@ -38,7 +38,6 @@ def create_app(test_config=None):
 
     from . import blog
     app.register_blueprint(blog.bp)
-    app.add_url_rule('/', endpoint='index')
 
     return app
 
