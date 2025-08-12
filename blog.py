@@ -24,7 +24,7 @@ def get_post(id, check_author=True):
 
     return post
 
-@bp.route('/')
+@bp.get('/')
 def index():
     db = get_db()
     posts = db.execute(
@@ -86,7 +86,7 @@ def update(id):
 
     return render_template('blog/update.html', post=post)
 
-@bp.route('/<int:id>/delete', methods=('POST',))
+@bp.route('/<int:id>/delete', methods=['POST'])
 @login_required
 def delete(id):
     get_post(id)
