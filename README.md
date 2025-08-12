@@ -8,6 +8,4 @@ Next step involves looking at https://blog.miguelgrinberg.com/post/the-flask-meg
 
 ## Starting the application
 
-You start the application by setting environment variables and running `flask run` i.e.
-
-`export FLASK_ENV=dev FLASK_APP=__init__.py flask run`
+You start the application by issuing `start` on the command line. This is because I've set up _direnv_ to take care of environment variables and alias.
